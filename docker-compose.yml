@@ -6,31 +6,28 @@ services:
   kvdb1:
     build: .
     ports:
-      - "8081:8080"
       - "9091:9090"
     volumes:
       - kvdb_data1:/app/data
-    command: [ "--id", "1", "--http", ":8080", "--raft", ":9090", "data-dir", "/app/data", "--cluster", "kvdb1:9090,kvdb2:9090,kvdb3:9090"]
+    command: [ "--id", "1",  "--raft", ":9090", "data-dir", "/app/data", "--cluster", "kvdb1:9090,kvdb2:9090,kvdb3:9090"]
     networks:
       - kvdb-cluster
   kvdb2:
     build: .
     ports:
-      - "8082:8080"
       - "9092:9090"
     volumes:
       - kvdb_data2:/app/data
-    command: [ "--id", "2", "--http", ":8080", "--raft", ":9090", "data-dir", "/app/data", "--cluster", "kvdb1:9090,kvdb2:9090,kvdb3:9090"]
+    command: [ "--id", "2",  "--raft", ":9090", "data-dir", "/app/data", "--cluster", "kvdb1:9090,kvdb2:9090,kvdb3:9090"]
     networks:
       - kvdb-cluster
   kvdb3:
     build: .
     ports:
-      - "8083:8080"
       - "9093:9090"
     volumes:
       - kvdb_data3:/app/data
-    command: [ "--id", "3", "--http", ":8080", "--raft", ":9090", "data-dir", "/app/data", "--cluster", "kvdb1:9090,kvdb2:9090,kvdb3:9090"]
+    command: [ "--id", "3",  "--raft", ":9090", "data-dir", "/app/data", "--cluster", "kvdb1:9090,kvdb2:9090,kvdb3:9090"]
     networks:
       - kvdb-cluster
 

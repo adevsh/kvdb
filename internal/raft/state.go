@@ -6,13 +6,14 @@ package raft
 import (
 	"encoding/json"
 	"fmt"
-	"kvdb/internal/storage"
-	"kvdb/pkg/types"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"sync"
 	"time"
+
+	"github.com/adevsh/kvdb/internal/storage"
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // NodeState represents the state of a Raft node

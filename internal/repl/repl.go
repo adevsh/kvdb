@@ -6,11 +6,12 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"kvdb/internal/raft"
-	"kvdb/internal/storage"
-	"kvdb/pkg/types"
 	"os"
 	"strings"
+
+	"github.com/adevsh/kvdb/internal/raft"
+	"github.com/adevsh/kvdb/internal/storage"
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // REPL handles the interactive command interface

@@ -6,9 +6,10 @@ package raft
 import (
 	"encoding/json"
 	"fmt"
-	"kvdb/internal/network"
-	"kvdb/pkg/types"
 	"time"
+
+	"github.com/adevsh/kvdb/internal/network"
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // Transport handles network communication for Raft

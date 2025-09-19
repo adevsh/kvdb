@@ -10,7 +10,7 @@ import (
 	"os"
 	"sync"
 
-	"kvdb/pkg/types"
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // WALEntry represents an entry in the Write-Ahead Log

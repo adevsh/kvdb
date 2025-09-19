@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"kvdb/internal/raft"
-	"kvdb/internal/repl"
-	"kvdb/internal/storage"
+	"github.com/adevsh/kvdb/internal/raft"
+	"github.com/adevsh/kvdb/internal/repl"
+	"github.com/adevsh/kvdb/internal/storage"
 )
 
 func main() {

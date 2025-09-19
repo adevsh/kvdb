@@ -6,9 +6,10 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"kvdb/pkg/types"
 	"os"
 	"sync"
+
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // RaftWAL implements WAL interface for Raft log entries

@@ -5,9 +5,10 @@ package raft
 
 import (
 	"fmt"
-	"kvdb/pkg/types"
 	"sort"
 	"time"
+
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // voteResult represents the result of a vote request
@@ -133,25 +134,22 @@ func (n *Node) sendAppendEntries(peerID int, heartbeat bool) {
 	currentTerm := n.Persistent.CurrentTerm
 	n.mu.RUnlock()
 
-	var entries types.LogEntry
+	var entriesInterface []interface{}
 
 	if !heartbeat {
 		// Get entries to send
-		if entries, err := n.logStore.GetRange(nextIndex, n.logStore.LastIndex()); err != nil {
-			// Convert to interface slice for JSON marshaling
-			entriesInterface := make([]interface{}, len(entries))
+		entries, _ := n.logStore.GetRange(nextIndex, n.logStore.LastIndex())
 
-			for i, entry := range entries {
-				entriesInterface[i] = entry
-			}
-
-			entries = entriesInterface
+		// Convert to []interface{} for JSON marshalling
+		entriesInterface = make([]interface{}, len(entries))
+		for i, entry := range entries {
+			entriesInterface[i] = entry
 		}
 	}
 
 	// Send AppendEntries RPC
 	success, err := n.transport.SendAppendEntries(peerID, currentTerm, prevLogIndex,
-		prevLogTerm, entries, n.Volatile.CommitIndex)
+		prevLogTerm, entriesInterface, n.Volatile.CommitIndex)
 
 	n.mu.Lock()
 	defer n.mu.Unlock()

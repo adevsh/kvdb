@@ -4,9 +4,10 @@ package raft
 
 import (
 	"fmt"
-	"kvdb/pkg/types"
 	"os"
 	"sync"
+
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // LogStore manages persitent storage of Raft log entries
@@ -23,7 +24,7 @@ type LogStore struct {
 // WAL represents the write-ahead log interface
 type WAL interface {
 	Write(entry types.LogEntry) error
-	Reply(handler func(entry types.LogEntry) error, startIndex uint64) error
+	Replay(handler func(entry types.LogEntry) error, startIndex uint64) error
 	Close() error
 	Truncate() error
 }
@@ -53,7 +54,7 @@ func (ls *LogStore) loadFromWAL() error {
 	ls.mu.Lock()
 	defer ls.mu.Unlock()
 
-	return ls.wal.Reply(func(entry types.LogEntry) error {
+	return ls.wal.Replay(func(entry types.LogEntry) error {
 		ls.entries = append(ls.entries, entry)
 		ls.lastIndex = entry.Index
 		ls.lastTerm = entry.Term

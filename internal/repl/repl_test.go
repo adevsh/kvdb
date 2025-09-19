@@ -1,7 +1,7 @@
 package repl
 
 import (
-	"kvdb/pkg/types"
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // MockRaftNode is a mock implementation of raft.Node for testing

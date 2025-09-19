@@ -6,11 +6,12 @@ package storage
 import (
 	"encoding/json"
 	"fmt"
-	"kvdb/pkg/types"
 	"os"
 	"path/filepath"
 	"sync"
 	"time"
+
+	"github.com/adevsh/kvdb/pkg/types"
 )
 
 // Storage represents the persistance key-value store
@@ -182,4 +183,9 @@ func (s *Storage) LastIndex() uint64 {
 	defer s.mu.RUnlock()
 
 	return s.lastIndex
+}
+
+// NewRaftWAL creates a new WAL for Raft log entries
+func (s *Storage) NewRaftWAL(path string) (*RaftWAL, error) {
+	return NewRaftWAL(path)
 }
